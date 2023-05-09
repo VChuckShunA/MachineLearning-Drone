@@ -35,7 +35,7 @@ public class RoadManager : MonoBehaviour {
 		//{pedestrianMarkers.Add(p);}
 		pedestrianMarkers = PedesMarkers;
 
-		Debug.Log("pedestrian markers " + pedestrianMarkers.Count);
+		//Debug.Log("pedestrian markers " + pedestrianMarkers.Count);
 	}
 
 	/// <summary>

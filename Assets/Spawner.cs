@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 	public GameObject packagePrefab; // The prefab of the package to spawn
-	public float respawnTime = 60f; // The time in seconds before the next package is spawned
+	public float respawnTime = 300f; // The time in seconds before the next package is spawned
 
 	private GameObject currentPackage; // The currently spawned package
 
@@ -19,9 +19,14 @@ public class Spawner : MonoBehaviour
 
 	private void Update() {
 		// Check if the current package has been moved
-		if (currentPackage != null && !isPackageMoved && Vector3.Distance(currentPackage.transform.position, startingPosition) > 0.1f) {
-			isPackageMoved = true;
-			Invoke("SpawnPackage", respawnTime);
+		//if (currentPackage != null && !isPackageMoved && Vector3.Distance(currentPackage.transform.position, startingPosition) > 0.1f) {
+		//isPackageMoved = true;
+		//Invoke("SpawnPackage", respawnTime);
+		//}
+
+		if (currentPackage.GetComponent<Package>().delivered) {
+			//Invoke("SpawnPackage", respawnTime);
+
 		}
 	}
 
@@ -32,4 +37,9 @@ public class Spawner : MonoBehaviour
 		currentPackage = Instantiate(packagePrefab, transform.position + Vector3.up * 0.05f, Quaternion.Euler(-90f, 90f, 0f));
 	}
 
+	private void OnTriggerEnter(Collider other) {
+		if (other.GetComponent<DroneController>().GetComponentInChildren<Packageattach>().hasPackage==false) {
+			other.GetComponent<DroneController>().AddReward(1f);
+		}
+	}
 }
