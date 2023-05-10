@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a2d164269d0396d4d9d29cd388262dcf, type: 3}
@@ -64,6 +65,7 @@ PrefabInstance:
       value: Spawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a2d164269d0396d4d9d29cd388262dcf, type: 3}
 --- !u!1 &3682594610948382381 stripped
 GameObject:
@@ -81,8 +83,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.51482207, y: 0.56307983, z: 0.34176636}
-  m_Center: {x: 0.025171667, y: 0.21846008, z: -0.0712738}
+  m_Size: {x: 0.4331666, y: 0.30111694, z: 0.20526123}
+  m_Center: {x: 0.19131108, y: 0.016525269, z: -0.0030212402}
 --- !u!114 &24787372
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class Package : MonoBehaviour
 	Renderer myRenderer;
 	public bool delivered=false;
 	GameObject drone;
+	public GameObject _parent;
 	// Start is called before the first frame update
 	void Start()
     {
@@ -16,24 +17,26 @@ public class Package : MonoBehaviour
 		myRenderer = GetComponent<Renderer>();
 		myRenderer.material.color = Color.yellow;
 		drone = GameObject.FindWithTag("Drone");
+		Debug.Log(_parent);
 	}
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
+	}
 
     private void OnTriggerEnter(Collider other) {
-		if (other.gameObject.tag == "DropZone" && other.gameObject.GetComponent<DropZone>().hasPackage!=true) {
+		if (other.gameObject.tag == "DropZone" && other.gameObject.GetComponent<DropZone>().hasPackage != true)
+		{
 			Debug.Log("DROP ZONE");
 			// Drop off package
-            DetachPackage();
+			DetachPackage();
 
 			other.gameObject.GetComponent<DropZone>().hasPackage = true;
 			myRenderer.material.color = Color.green;
-			StartCoroutine(DestroyAfterSeconds(300f,other));
+			StartCoroutine(DestroyAfterSeconds(300f, other));
 		}
+		
 	}
 
 
@@ -44,7 +47,8 @@ public class Package : MonoBehaviour
 		this.transform.parent = null;
 		myCollider.isTrigger = false;
 		delivered=true;
-		drone.GetComponent<DroneController>().AddReward(2f);
+		drone.GetComponent<DroneController>().inPickUpZone = false;
+		drone.GetComponent<DroneController>().AddReward(5f);
 	}
 
 	// Coroutine to destroy the object after a certain amount of time

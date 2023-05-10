@@ -19,8 +19,9 @@ public class DroneController : Agent
 	public float zoomMin = -5f;
 	public float zoomMax = 2f;
 	public GameObject AttachPoint;
-
+	public bool inPickUpZone=false;
 	private Vector3 cameraOffset;
+	public float rewardAmount = 1f;
 	// Initialize closest object and distance
 	GameObject closestPackage = null;
 	GameObject closestDropzone = null;
@@ -39,7 +40,7 @@ public class DroneController : Agent
 			moveSpeed = 5f;
 			verticalSpeed = 5f;
 		} else {
-			moveSpeed = 0.1f;
+			moveSpeed = 1f;
 			verticalSpeed = 5f;
 		}
 		// Zoom in and out
@@ -82,13 +83,20 @@ public class DroneController : Agent
 
 		}
 
-		// Check if closest object was found
-		if (closestPackage != null) {
-			//Debug.Log("Closest Package is: " + closestPackage.name);
-		}
-
-		if (closestDropzone != null) {
-			//Debug.Log("Closest DroZone is: " + closestDropzone.name);
+		//Reward the drone if it gets closer to a dropzone once it has the package
+		if (AttachPoint.GetComponent<Packageattach>().hasPackage) {
+			float closestDistance = float.MaxValue;
+			// Calculate reward based on distance to closest drop zone
+			float reward = rewardAmount * (1f - closestDistance / 100f);
+			if (distanceToClosestDropZone < 5f)
+			{
+				AddReward(reward);
+			}
+			else
+			{
+				AddReward(-reward);
+				Debug.Log("Punished!");
+			}
 		}
 	}
 
@@ -107,12 +115,13 @@ public class DroneController : Agent
 			return;
 			//Debug.Log(other.tag);
 		} else if (other.gameObject.tag == "Spawner" || other.gameObject.tag == "DropZone") {
-			AddReward(1f);
+			AddReward(.5f);
 		} 
 		else{
 			Debug.Log("Hit");
 			Debug.Log(other.tag);
 			AddReward(-1f);
+			Debug.Log("Punished!");
 			EndEpisode();
 		}
 		}
@@ -120,6 +129,7 @@ public class DroneController : Agent
 		if (other.gameObject.GetComponent<OutOfBounds>()) {
 			Debug.Log("Drone has exited the box collider!");
 			AddReward(-1f);
+			Debug.Log("Punished!");
 		}
 	}
 
@@ -148,7 +158,18 @@ public class DroneController : Agent
 
 	public override void OnEpisodeBegin() {
 		transform.localPosition = new Vector3(500,1,500);
-		Destroy(AttachPoint.GetComponentInChildren<Package>());
+		if (AttachPoint.transform.childCount > 0)
+		{
+			GameObject child = AttachPoint.transform.GetChild(0).gameObject;
+			child.transform.parent = null;
+			child.transform.position = child.GetComponent<Package>()._parent.transform.position;
+			child.transform.parent= child.GetComponent<Package>()._parent.gameObject.transform;
+
+			
+			child.transform.SetPositionAndRotation(child.transform.position + Vector3.up * 0.05f, Quaternion.Euler(-90f, 90f, 0f));
+
+		}
+		inPickUpZone = false;
 		AttachPoint.GetComponent<Packageattach>().hasPackage = false;
 	}
 	public override void Heuristic(in ActionBuffers actionsOut) {

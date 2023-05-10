@@ -1,0 +1,82 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1683718938",
+        "python_version": "3.8.16 (default, Mar  2 2023, 03:18:16) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\S4211891\\.conda\\envs\\ml-agents-r17\\Scripts\\mlagents-learn --run-id=Reinforcement2 --resume",
+        "mlagents_version": "0.26.0",
+        "mlagents_envs_version": "0.26.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1683718952"
+    },
+    "total": 14.1932694,
+    "count": 1,
+    "self": 0.00728989999999996,
+    "children": {
+        "run_training.setup": {
+            "total": 0.018027400000000027,
+            "count": 1,
+            "self": 0.018027400000000027
+        },
+        "TrainerController.start_learning": {
+            "total": 14.1679521,
+            "count": 1,
+            "self": 9.520000000229345e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 13.6824256,
+                    "count": 1,
+                    "self": 13.6824256
+                },
+                "TrainerController.advance": {
+                    "total": 0.4415533999999983,
+                    "count": 1,
+                    "self": 6.29999999723907e-06,
+                    "children": {
+                        "env_step": {
+                            "total": 0.4415471000000011,
+                            "count": 1,
+                            "self": 7.660000000164757e-05,
+                            "children": {
+                                "SubprocessEnvManager._take_step": {
+                                    "total": 0.44147049999999943,
+                                    "count": 1,
+                                    "self": 1.1999999999900979e-05,
+                                    "children": {
+                                        "TorchPolicy.evaluate": {
+                                            "total": 0.44145849999999953,
+                                            "count": 1,
+                                            "self": 0.00046469999999843026,
+                                            "children": {
+                                                "TorchPolicy.sample_actions": {
+                                                    "total": 0.4409938000000011,
+                                                    "count": 1,
+                                                    "self": 0.4409938000000011
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "TrainerController._save_models": {
+                    "total": 0.043877900000000025,
+                    "count": 1,
+                    "self": 1.5099999998824387e-05,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 0.0438628000000012,
+                            "count": 1,
+                            "self": 0.0438628000000012
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

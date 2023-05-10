@@ -1,0 +1,47 @@
+{
+    "DroneBehaviour": {
+        "checkpoints": [
+            {
+                "steps": 3317,
+                "file_path": "results\\Reinforcement3\\DroneBehaviour\\DroneBehaviour-3317.onnx",
+                "reward": 0.0,
+                "creation_time": 1683719532.543594,
+                "auxillary_file_paths": [
+                    "results\\Reinforcement3\\DroneBehaviour\\DroneBehaviour-3317.pt"
+                ]
+            },
+            {
+                "steps": 21018,
+                "file_path": "results\\Reinforcement3\\DroneBehaviour\\DroneBehaviour-21018.onnx",
+                "reward": 0.0,
+                "creation_time": 1683719722.236331,
+                "auxillary_file_paths": [
+                    "results\\Reinforcement3\\DroneBehaviour\\DroneBehaviour-21018.pt"
+                ]
+            },
+            {
+                "steps": 51404,
+                "file_path": "results\\Reinforcement3\\DroneBehaviour\\DroneBehaviour-51404.onnx",
+                "reward": 0.0,
+                "creation_time": 1683720288.7620113,
+                "auxillary_file_paths": [
+                    "results\\Reinforcement3\\DroneBehaviour\\DroneBehaviour-51404.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 51404,
+            "file_path": "results\\Reinforcement3\\DroneBehaviour.onnx",
+            "reward": 0.0,
+            "creation_time": 1683720288.7620113,
+            "auxillary_file_paths": [
+                "results\\Reinforcement3\\DroneBehaviour\\DroneBehaviour-51404.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

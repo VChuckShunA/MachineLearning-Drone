@@ -35,11 +35,13 @@ public class Spawner : MonoBehaviour
 	void SpawnPackage() {
 		isPackageMoved = false;
 		currentPackage = Instantiate(packagePrefab, transform.position + Vector3.up * 0.05f, Quaternion.Euler(-90f, 90f, 0f));
+		currentPackage.GetComponent<Package>()._parent = this.transform.gameObject;
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if (other.GetComponent<DroneController>().GetComponentInChildren<Packageattach>().hasPackage==false) {
-			other.GetComponent<DroneController>().AddReward(1f);
+		if (other.GetComponent<DroneController>().GetComponentInChildren<Packageattach>().hasPackage==false && other.GetComponent<DroneController>().inPickUpZone) {
+			other.GetComponent<DroneController>().AddReward(0.01f);
+			other.GetComponent<DroneController>().inPickUpZone = true;
 		}
 	}
 }
